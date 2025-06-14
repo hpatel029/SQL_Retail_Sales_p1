@@ -22,7 +22,7 @@ CREATE TABLE retail_sales
 -- ALTER COLUMN NAME
 ALTER TABLE retail_sales RENAME COLUMN quantiy to quantity;
 
--- Data Cleaning & Data Exploration
+-- Data Exploration & Cleaning
 SELECT * FROM retail_sales
 LIMIT 10; 
 
