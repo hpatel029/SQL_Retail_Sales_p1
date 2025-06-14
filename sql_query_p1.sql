@@ -26,11 +26,11 @@ ALTER TABLE retail_sales RENAME COLUMN quantiy to quantity;
 SELECT * FROM retail_sales
 LIMIT 10; 
 
-SELECT count(*) as total_sales
+SELECT COUNT(*) as total_sales
 FROM retail_sales;
 
 -- How many unique customers we have?
-SELECT count(DISTINCT customer_id) as total_customers
+SELECT COUNT(DISTINCT customer_id) as total_customers
 FROM retail_sales;
 
 SELECT DISTINCT category 
