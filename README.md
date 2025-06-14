@@ -36,7 +36,7 @@ CREATE TABLE retail_sales
     gender VARCHAR(15),
     age INT,
     category VARCHAR(15),
-    quantiy INT,
+    quantity INT,
     price_per_unit FLOAT,	
     cogs FLOAT,
     total_sale FLOAT
@@ -51,7 +51,6 @@ CREATE TABLE retail_sales
 - **Null Value Check**: Check for any null values in the dataset and delete records with missing data.
 
 ```sql
-ALTER TABLE retail_sales RENAME column quantiy to quantity;
 SELECT * FROM retail_sales LIMIT 10;
 SELECT COUNT(*) FROM retail_sales;
 SELECT COUNT(DISTINCT customer_id) FROM retail_sales;
@@ -132,7 +131,7 @@ GROUP BY year, month
 WHERE rnk = 1;
 ```
 
-8. **Write a SQL query to find the top 5 customers based on the highest total sales **:
+8. **Write a SQL query to find the top 5 customers based on the highest total sales**:
 ```sql
 SELECT customer_id, SUM(total_sale) as highest_sale
 FROM retail_sales 
