@@ -13,14 +13,14 @@ CREATE TABLE retail_sales
 			gender VARCHAR(15),
 			age INT,
 			category VARCHAR(15),	
-			quantiy INT,
+			quantity INT,
 			price_per_unit FLOAT,	
 			cogs FLOAT,
 			total_sale FLOAT
 		);
 
 -- ALTER COLUMN NAME
-ALTER TABLE retail_sales RENAME COLUMN quantiy to quantity;
+ALTER TABLE retail_sales RENAME COLUMN quantity to quantity;
 
 -- Data Exploration & Cleaning
 SELECT * FROM retail_sales
