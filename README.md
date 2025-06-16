@@ -120,7 +120,7 @@ WHERE category = 'clothing'
 
 3. **Write a SQL query to calculate the total sales (total_sale) for each category.**:
 ```sql
-SELECT category, sum(total_sale) as net_sale, count(*) as total_orders
+SELECT category, SUM(total_sale) as net_sale, COUNT(*) as total_orders
 FROM retail_sales
 GROUP BY category;
 ```
@@ -140,7 +140,7 @@ WHERE total_sale > 1000;
 
 6. **Write a SQL query to find the total number of transactions (transaction_id) made by each gender in each category.**:
 ```sql
-SELECT count(*) as total_trans_id, gender, category
+SELECT COUNT(*) as total_trans_id, gender, category
 FROM retail_sales
 GROUP BY gender, category
 ORDER BY category;
@@ -152,7 +152,7 @@ SELECT year, month, avg_sale
 FROM
 (
 SELECT EXTRACT(year FROM sale_date) as year, EXTRACT(month FROM sale_date) as month, ROUND(AVG(total_sale),2) as avg_sale,
-RANK() OVER(partition by EXTRACT(year FROM sale_date) ORDER BY avg(total_sale) DESC) as rnk
+RANK() OVER(PARTITION BY EXTRACT(year FROM sale_date) ORDER BY AVG(total_sale) DESC) as rnk
 FROM retail_sales
 GROUP BY year, month
 ) as t1
@@ -182,9 +182,9 @@ as
 (
 SELECT *,
 	CASE 
-		WHEN EXTRACT(hour FROM sale_time) < 12 THEN 'Morning'
-        WHEN EXTRACT(hour FROM sale_time) BETWEEN 12 AND 17 THEN 'Afternoon'
-        ELSE 'Evening'
+        	WHEN EXTRACT(hour FROM sale_time) < 12 THEN 'Morning'
+        	WHEN EXTRACT(hour FROM sale_time) BETWEEN 12 AND 17 THEN 'Afternoon'
+        	ELSE 'Evening'
 	END as shift
 FROM retail_sales
 )
