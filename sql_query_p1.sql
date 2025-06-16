@@ -38,7 +38,7 @@ FROM retail_sales;
 
 SELECT * FROM retail_sales
 WHERE
-	transactions_id IS NULL
+    transactions_id IS NULL
     OR
     sale_date IS NULL
     OR
@@ -56,7 +56,7 @@ WHERE
     
 DELETE FROM retail_sales
 WHERE 
-	transactions_id IS NULL
+    transactions_id IS NULL
     OR
     sale_date IS NULL
     OR
@@ -66,7 +66,7 @@ WHERE
     OR
     category IS NULL
     OR
-    quantiy IS NULL
+    quantity IS NULL
     OR
     cogs IS NULL
     OR
@@ -83,16 +83,16 @@ WHERE sale_date = '2022-11-05';
 SELECT *
 FROM retail_sales
 WHERE category = 'clothing' 
-	AND quantity >= 4
+    AND quantity >= 4
     AND sale_date >= '2022-11-01'
     AND sale_date <= '2022-11-30';
     
 -- Q3 WAQ to calculate the total sales (total_sale) for each category
-SELECT category, sum(total_sale) as net_sale, count(*) as total_orders
+SELECT category, SUM(total_sale) as net_sale, COUNT(*) as total_orders
 FROM retail_sales
 GROUP BY category;
 
--- Q4 WAQ to find the qverage age of customers who purchased items from the 'Beauty' category
+-- Q4 WAQ to find the average age of customers who purchased items from the 'Beauty' category
 SELECT ROUND(AVG(age),2) as avg_age 
 FROM retail_sales 
 WHERE category = 'beauty';
@@ -102,7 +102,7 @@ SELECT * FROM retail_sales
 WHERE total_sale > 1000;
 
 -- Q6 WAQ to find the total numbers of transactions (transaction_id) made by each gender in each category 
-SELECT count(*) as total_trans_id, gender, category
+SELECT COUNT(*) as total_trans_id, gender, category
 FROM retail_sales
 GROUP BY gender, category
 ORDER BY category;
@@ -111,8 +111,8 @@ ORDER BY category;
 SELECT year, month, avg_sale 
 FROM
 (
-SELECT extract(year FROM sale_date) as year, extract(month FROM sale_date) as month, round(avg(total_sale),2) as avg_sale,
-RANK() OVER(partition by extract(year FROM sale_date) ORDER BY avg(total_sale) DESC) as rnk
+SELECT EXTRACT(year FROM sale_date) as year, EXTRACT(month FROM sale_date) as month, ROUND(AVG(total_sale),2) as avg_sale,
+RANK() OVER(PARTITION BY EXTRACT(year FROM sale_date) ORDER BY AVG(total_sale) DESC) as rnk
 FROM retail_sales
 GROUP BY year, month
 ) as t1
@@ -137,10 +137,11 @@ as
 SELECT *,
 	CASE 
 		WHEN EXTRACT(hour FROM sale_time) < 12 THEN 'Morning'
-        WHEN EXTRACT(hour FROM sale_time) BETWEEN 12 AND 17 THEN 'Afternoon'
-        ELSE 'Evening'
+        	WHEN EXTRACT(hour FROM sale_time) BETWEEN 12 AND 17 THEN 'Afternoon'
+        	ELSE 'Evening'
 	END as shift
 FROM retail_sales
+	
 )
 SELECT shift, COUNT(*) as total_orders
 FROM hourly_sale
